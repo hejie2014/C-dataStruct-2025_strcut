@@ -7,8 +7,13 @@ typedef struct Node
     struct Node *next;
 
 } Node;
-void Insert(Node **head, int data, int n)
+void Insert(Node **head, int data, int n, int *count)
 {
+    if (n > *count + 1)
+    {
+        printf("位置超出范围！");
+        return;
+    }
     Node *temp1 = (Node *)malloc(sizeof(Node));
     temp1->data = data;
     temp1->next = NULL;
@@ -17,6 +22,7 @@ void Insert(Node **head, int data, int n)
     {
         temp1->next = *head;
         *head = temp1;
+        (*count)++;
         return;
     }
     // 其他位置
@@ -29,6 +35,7 @@ void Insert(Node **head, int data, int n)
     // 到达N-1的节点位置
     temp1->next = temp2->next;
     temp2->next = temp1;
+    (*count)++;
 }
 void Print(Node *head)
 {
@@ -53,12 +60,17 @@ void freeList(Node *head)
 }
 int main()
 {
-    Node *head = NULL;   // 空链表
-    Insert(&head, 2, 1); // list: 2
-    Insert(&head, 3, 2); // list: 2,3
-    Insert(&head, 4, 1); // list: 4,2,3
-    Insert(&head, 5, 2); // list: 4,5,2,3
+    int count = 0;
+    Node *head = NULL;           // 空链表
+    Insert(&head, 2, 1, &count); // list: 2
+    Insert(&head, 3, 2, &count); // list: 2,3
+    Insert(&head, 4, 1, &count); // list: 4,2,3
+    Insert(&head, 5, 2, &count); // list: 4,5,2,3
+    Insert(&head, 8, 5, &count); // list: 4,5,2,3，8
+    Insert(&head, 9, 5, &count); //  4 -> 5 -> 2 -> 3 -> 9 -> 8 -> NULL
+    Insert(&head, 9, 8, &count);
     Print(head);
+    printf("count = %d\n", count);
     freeList(head);
     return 0;
 }
