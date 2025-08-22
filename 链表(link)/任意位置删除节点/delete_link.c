@@ -72,6 +72,37 @@ void Delete(Node **head, int n)
     temp->next = temp->next->next;
     free(temp2);
 }
+void Invert(Node **head)
+{
+    Node *prev = NULL;
+    Node *current = *head;
+    Node *next;
+    // 最后一次循环，next与current指向NULL，prev指向链表的最后一个节点
+    while (current != NULL)
+    {
+        next = current->next; // 先移动next到下一个节点
+        current->next = prev;
+        // 更新节点
+        prev = current;
+        current = next;
+    } // 经过一次循环后，next与current指向同一个节点，prev是上一个节点。
+    // 最后一次循环，next与current指向NULL，prev指向链表的最后一个节点
+    // Node *next = current->next;
+
+    // while (current != NULL)
+    // {
+    //     current->next = prev;
+    //     // 移动指针位置
+    //     prev = current;
+    //     current = next;
+    //     if (current == NULL)
+    //         next = NULL;
+    //     else
+    //         next = next->next;
+    //     printf("prev = %p, current = %p, next = %p\n", prev, current, next);
+    // }
+    *head = prev;
+}
 int main()
 {
     Node *head = NULL;
@@ -85,6 +116,8 @@ int main()
     Delete(&head, 6);
     Print(head);
     Delete(&head, 3);
+    Print(head);
+    Invert(&head);
     Print(head);
     freeList(head);
 
