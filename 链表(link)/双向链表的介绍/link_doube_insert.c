@@ -96,7 +96,7 @@ bool insert(DoublyLinkedList *list, int data, int position)
         else
         {
             current = list->tail;
-            // 等价于 (int i = 0; i < size - positioon; i++)
+            // 等价于 (int i = 0; i < size - position; i++)
             for (int i = list->size - 1; i > position - 1; i--)
             {
                 current = current->prev;
