@@ -4,6 +4,7 @@
 
 #define INITIAL_CAPACITY 5
 
+// 定义一个结构体，包括数组，栈顶指针和容量
 typedef struct
 {
     int *data;
@@ -11,14 +12,14 @@ typedef struct
     int capacity;
 } Stack;
 
-bool isEmpty(Stack *s)
+bool isEmpty(Stack *s) // 传入一个结构体指针
 {
     return s->top == -1;
 }
 
 void push(Stack *s, int x)
 {
-    if (s->top == s->capacity - 1)
+    if (s->top == s->capacity - 1) // capacity - 1到达数组最后一个位置
     {
         int new_capacity = s->capacity * 2;
         int *new_data = realloc(s->data, sizeof(int) * new_capacity);
@@ -59,7 +60,7 @@ void print(Stack *s)
     }
     printf("\n");
 }
-
+// 栈的初始化
 void initStack(Stack *s, int capacity)
 {
     s->data = malloc(sizeof(int) * capacity);
@@ -71,7 +72,7 @@ void initStack(Stack *s, int capacity)
     s->top = -1;
     s->capacity = capacity;
 }
-
+// 释放栈
 void freeStack(Stack *s)
 {
     free(s->data);
