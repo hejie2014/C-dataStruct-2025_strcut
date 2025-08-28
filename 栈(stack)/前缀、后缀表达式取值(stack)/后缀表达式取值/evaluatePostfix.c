@@ -184,7 +184,7 @@ int evaluatePostfix(char *exp)
 int main()
 {
     Node *top = NULL;
-    char exp[] = "12 3*5 4*+9-"; //"23*54*+9-"
+    char exp[] = "2 3 4* + 5 6*-"; //"23*54*+9-"
     int result = evaluatePostfix(exp);
     printf("result = %d\n", result);
     char a = '2' - '0';
