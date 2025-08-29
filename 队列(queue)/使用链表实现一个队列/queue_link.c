@@ -36,14 +36,14 @@ Node *createNode(int data)
 // 判断队列链表是否为空
 bool isempty(Queue *q)
 {
-    return q->tail == NULL;
+    return (q->head == NULL && q->tail == NULL);
 }
 // 入队
 void enQueue(Queue *q, int data)
 {
     Node *newNode = createNode(data);
     // 链表为空
-    if (q->head == NULL)
+    if (q->head == NULL && q->tail == NULL)
     { // 头尾指针指向同一个节点
         q->head = newNode;
         q->tail = newNode;
@@ -62,19 +62,36 @@ void dequeue(Queue *q)
         printf("Error: No element to dequeue!\n");
         return;
     }
-    // head指针指向下一个节点
     Node *temp = q->head;
+    // front与rear指向同一个节点 在执行出队操作，就是一个空队列，也就是NULL
+    if (q->head == q->tail)
+    {
+        q->head = q->tail = NULL;
+        free(temp);
+        return;
+    }
+    // head指针指向下一个节点
     q->head = temp->next;
     free(temp); // 释放该删除节点的内存
 }
 // 头结点的数据
 int frontValue(Queue *q)
 {
+    if (q->head == NULL)
+    {
+        printf("Queue is empty\n");
+        return -1;
+    }
     return q->head->data;
 }
 // 尾结点的数据
 int rearValue(Queue *q)
 {
+    if (q->head == NULL)
+    {
+        printf("Queue is empty\n");
+        return -1;
+    }
     return q->tail->data;
 }
 // 打印链表
