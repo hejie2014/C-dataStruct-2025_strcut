@@ -54,7 +54,7 @@ bool search(bstNode *root, int data)
     {
         return true;
     }
-    else if (data <= root->data) // 数据没有在该节点找到，就一直继续往左找，直到返回
+    else if (data < root->data) // 数据没有在该节点找到，就一直继续往左找，直到返回
         return search(root->left, data);
     else
         return search(root->right, data); // 数据没有在该节点找到，就一直继续往右找，直到返回
@@ -141,6 +141,8 @@ bstNode *deleteNode(bstNode *root, int data)
             bstNode *temp = findMin(root->right);
             printf("value = %d\n", temp->data);
             // 将最小值赋值给要删除的节点；
+            // 在将右子树中最小值的节点删除，该节点一定是叶子节点，或一个子节点并且左子树为，不可能有多个节点
+            // 修复该删除节点的右子树，所以传入的root是root->right
             root->data = temp->data;
             root->right = deleteNode(root->right, temp->data);
         }
