@@ -12,6 +12,7 @@
         "utility": "c",
         "optional": "c",
         "format": "c",
-        "system_error": "c"
+        "system_error": "c",
+        "stdio.h": "c"
     }
 }
