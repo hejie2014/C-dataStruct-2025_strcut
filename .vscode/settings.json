@@ -14,5 +14,9 @@
         "format": "c",
         "system_error": "c",
         "stdio.h": "c"
-    }
+    },
+    "cSpell.words": [
+        "isbst",
+        "isbstinorder"
+    ]
 }
